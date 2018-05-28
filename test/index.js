@@ -44,6 +44,7 @@ const not = b => !b;
 //    testLaws :: Object -> Object -> Undefined
 const testLaws = laws => arbs => {
   (Object.keys (laws)).forEach (name => {
+    eq (laws[name].length) (arbs[name].length);
     test (name.replace (/[A-Z]/g, c => ' ' + c.toLowerCase ()),
           laws[name] (...arbs[name]));
   });
@@ -212,7 +213,6 @@ suite ('Ord laws', () => {
       IdentityArb (NumberArb),
     ],
     antisymmetry: [
-      IdentityArb (NumberArb),
       IdentityArb (NumberArb),
       IdentityArb (NumberArb),
     ],
