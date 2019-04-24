@@ -50,13 +50,15 @@
     /* eslint-disable no-unused-vars */
     var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
-    var type = __doctest.require ('sanctuary-type-identifiers');
     /* eslint-enable no-unused-vars */
   }
+
+  var identityTypeIdent = 'sanctuary-identity/Identity@1';
 
   var prototype = {
     /* eslint-disable key-spacing */
     'constructor':            Identity,
+    '@@type':                 identityTypeIdent,
     '@@show':                 Identity$prototype$show,
     'fantasy-land/map':       Identity$prototype$map,
     'fantasy-land/ap':        Identity$prototype$ap,
@@ -135,19 +137,6 @@
     identity.value = value;
     return identity;
   }
-
-  //# Identity.@@type :: String
-  //.
-  //. Identity [type identifier][].
-  //.
-  //. ```javascript
-  //. > type (Identity (42))
-  //. 'sanctuary-identity/Identity@1'
-  //.
-  //. > type.parse (type (Identity (42)))
-  //. {namespace: 'sanctuary-identity', name: 'Identity', version: 1}
-  //. ```
-  Identity['@@type'] = 'sanctuary-identity/Identity@1';
 
   //# Identity.fantasy-land/of :: a -> Identity a
   //.
