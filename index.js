@@ -47,18 +47,11 @@
 
   /* istanbul ignore if */
   if (typeof __doctest !== 'undefined') {
+    /* eslint-disable no-unused-vars */
+    var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
     var type = __doctest.require ('sanctuary-type-identifiers');
-    var S = (function() {
-      var S = __doctest.require ('sanctuary');
-      var IdentityType = $.UnaryType
-        ('sanctuary-identity/Identity')
-        ('')
-        (function(x) { return type (x) === Identity['@@type']; })
-        (function(i) { return [i.value]; });
-      var env = Z.concat (S.env, [$.TypeClass, IdentityType ($.Unknown)]);
-      return S.create ({checkTypes: true, env: env});
-    } ());
+    /* eslint-enable no-unused-vars */
   }
 
   var prototype = {
