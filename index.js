@@ -54,9 +54,12 @@
     /* eslint-enable no-unused-vars */
   }
 
+  var identityTypeIdent = 'sanctuary-identity/Identity@1';
+
   var prototype = {
     /* eslint-disable key-spacing */
     'constructor':            Identity,
+    '@@type':                 identityTypeIdent,
     '@@show':                 Identity$prototype$show,
     'fantasy-land/map':       Identity$prototype$map,
     'fantasy-land/ap':        Identity$prototype$ap,
@@ -81,11 +84,14 @@
   //. ```javascript
   //. > const Useless = require ('sanctuary-useless')
   //.
+  //. > const isTypeClass = x =>
+  //. .   type (x) === 'sanctuary-type-classes/TypeClass@1'
+  //.
   //. > S.map (k => k + ' '.repeat (16 - k.length) +
   //. .             (Z[k].test (Identity (Useless)) ? '\u2705   ' :
   //. .              Z[k].test (Identity (['foo'])) ? '\u2705 * ' :
   //. .              /* otherwise */                  '\u274C   '))
-  //. .       (S.keys (S.unchecked.filter (S.is ($.TypeClass)) (Z)))
+  //. .       (S.keys (S.unchecked.filter (isTypeClass) (Z)))
   //. [ 'Setoid          ✅ * ',  // if ‘a’ satisfies Setoid
   //. . 'Ord             ✅ * ',  // if ‘a’ satisfies Ord
   //. . 'Semigroupoid    ❌   ',
@@ -135,19 +141,6 @@
     identity.value = value;
     return identity;
   }
-
-  //# Identity.@@type :: String
-  //.
-  //. Identity [type identifier][].
-  //.
-  //. ```javascript
-  //. > type (Identity (42))
-  //. 'sanctuary-identity/Identity@1'
-  //.
-  //. > type.parse (type (Identity (42)))
-  //. {namespace: 'sanctuary-identity', name: 'Identity', version: 1}
-  //. ```
-  Identity['@@type'] = 'sanctuary-identity/Identity@1';
 
   //# Identity.fantasy-land/of :: a -> Identity a
   //.
@@ -334,5 +327,4 @@
 //. [`Z.equals`]:               v:sanctuary-js/sanctuary-type-classes#equals
 //. [`Z.lte`]:                  v:sanctuary-js/sanctuary-type-classes#lte
 //. [iff]:                      https://en.wikipedia.org/wiki/If_and_only_if
-//. [type identifier]:          v:sanctuary-js/sanctuary-type-identifiers
 //. [type representative]:      v:fantasyland/fantasy-land#type-representatives
