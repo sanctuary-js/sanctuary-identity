@@ -20,11 +20,11 @@
 //. Identity is the simplest container type: a value of type `Identity a`
 //. always contains exactly one value, of type `a`.
 
-(function(f) {
+(f => {
 
   'use strict';
 
-  var util = {inspect: {}};
+  const util = {inspect: {}};
 
   /* istanbul ignore else */
   if (typeof module === 'object' && typeof module.exports === 'object') {
@@ -32,30 +32,29 @@
                         require ('sanctuary-show'),
                         require ('sanctuary-type-classes'));
   } else if (typeof define === 'function' && define.amd != null) {
-    define (['sanctuary-show', 'sanctuary-type-classes'], function(show, Z) {
-      return f (util, show, Z);
-    });
+    define (['sanctuary-show', 'sanctuary-type-classes'],
+            (show, Z) => f (util, show, Z));
   } else {
     self.sanctuaryIdentity = f (util,
                                 self.sanctuaryShow,
                                 self.sanctuaryTypeClasses);
   }
 
-} (function(util, show, Z) {
+}) ((util, show, Z) => {
 
   'use strict';
 
   /* istanbul ignore if */
   if (typeof __doctest !== 'undefined') {
-    /* eslint-disable no-unused-vars */
+    /* eslint-disable no-unused-vars, no-var */
     var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable no-unused-vars, no-var */
   }
 
-  var identityTypeIdent = 'sanctuary-identity/Identity@1';
+  const identityTypeIdent = 'sanctuary-identity/Identity@1';
 
-  var prototype = {
+  const prototype = {
     /* eslint-disable key-spacing */
     'constructor':            Identity,
     '@@type':                 identityTypeIdent,
@@ -66,14 +65,16 @@
     'fantasy-land/reduce':    Identity$prototype$reduce,
     'fantasy-land/traverse':  Identity$prototype$traverse,
     'fantasy-land/extend':    Identity$prototype$extend,
-    'fantasy-land/extract':   Identity$prototype$extract
+    'fantasy-land/extract':   Identity$prototype$extract,
     /* eslint-enable key-spacing */
   };
 
-  var custom = util.inspect.custom;  // added in Node.js v6.6.0
-  /* istanbul ignore else */
-  if (typeof custom === 'symbol') {
-    prototype[custom] = Identity$prototype$show;
+  {
+    const {custom} = util.inspect;  // added in Node.js v6.6.0
+    /* istanbul ignore else */
+    if (typeof custom === 'symbol') {
+      prototype[custom] = Identity$prototype$show;
+    }
   }
 
   //. `Identity a` satisfies the following [Fantasy Land][] specifications:
@@ -122,7 +123,7 @@
   //. Identity (42)
   //. ```
   function Identity(value) {
-    var identity = Object.create (prototype);
+    const identity = Object.create (prototype);
     if (Z.Setoid.test (value)) {
       identity['fantasy-land/equals'] = Identity$prototype$equals;
       if (Z.Ord.test (value)) {
@@ -146,8 +147,8 @@
   //. ```
   Identity['fantasy-land/of'] = Identity;
 
-  function next(x) { return {tag: next, value: x}; }
-  function done(x) { return {tag: done, value: x}; }
+  const next = x => ({tag: next, value: x});
+  const done = x => ({tag: done, value: x});
 
   //# Identity.fantasy-land/chainRec :: ((a -> c, b -> c, a) -> Identity c, a) -> Identity b
   //.
@@ -166,8 +167,8 @@
   //. . )
   //. Identity (0)
   //. ```
-  Identity['fantasy-land/chainRec'] = function(f, x) {
-    var r = next (x);
+  Identity['fantasy-land/chainRec'] = (f, x) => {
+    let r = next (x);
     while (r.tag === next) r = (f (next, done, r.value)).value;
     return Identity (r.value);
   };
@@ -315,7 +316,7 @@
 
   return Identity;
 
-}));
+});
 
 //. [Fantasy Land]:             v:fantasyland/fantasy-land
 //. [`Z.equals`]:               v:sanctuary-js/sanctuary-type-classes#equals
