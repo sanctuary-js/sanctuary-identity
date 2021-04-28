@@ -178,7 +178,7 @@
   //. `show (Identity (x))` is equivalent to `'Identity (' + show (x) + ')'`.
   //.
   //. ```javascript
-  //. > show (Identity (['foo', 'bar', 'baz']))
+  //. > S.show (Identity (['foo', 'bar', 'baz']))
   //. 'Identity (["foo", "bar", "baz"])'
   //. ```
   function Identity$prototype$show() {
