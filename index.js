@@ -75,6 +75,12 @@
     if (typeof custom === 'symbol') {
       prototype[custom] = Identity$prototype$show;
     }
+    /* istanbul ignore if */
+    if (typeof Deno !== 'undefined') {
+      if (Deno != null && typeof Deno.customInspect === 'symbol') {
+        prototype[Deno.customInspect] = Identity$prototype$show;
+      }
+    }
   }
 
   //. `Identity a` satisfies the following [Fantasy Land][] specifications:
