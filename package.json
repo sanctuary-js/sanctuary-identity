@@ -26,7 +26,7 @@
     "jsverify": "0.8.x",
     "sanctuary": "3.1.0",
     "sanctuary-def": "0.22.0",
-    "sanctuary-scripts": "5.0.x",
+    "sanctuary-scripts": "6.0.x",
     "sanctuary-type-identifiers": "4.0.0",
     "sanctuary-useless": "2.0.x"
   },
