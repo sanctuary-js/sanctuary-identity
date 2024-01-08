@@ -6,15 +6,8 @@
   },
   "overrides": [
     {
-      "files": ["*.md"],
-      "globals": {"$": "readonly", "Identity": "readonly", "S": "readonly", "Z": "readonly"}
-    },
-    {
       "files": ["index.js"],
-      "globals": {"Deno": "readonly", "process": "readonly"},
-      "rules": {
-        "multiline-comment-style": ["off"]
-      }
+      "globals": {"Deno": "readonly", "__doctest": "readonly", "define": "readonly", "module": "readonly", "process": "readonly", "require": "readonly", "self": "readonly"}
     },
     {
       "files": ["test/**/*.js"],
