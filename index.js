@@ -24,7 +24,7 @@
 
   'use strict';
 
-  /* istanbul ignore else */
+  /* c8 ignore start */
   if (typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = f (require ('sanctuary-show'),
                         require ('sanctuary-type-classes'));
@@ -34,18 +34,20 @@
     self.sanctuaryIdentity = f (self.sanctuaryShow,
                                 self.sanctuaryTypeClasses);
   }
+  /* c8 ignore stop */
 
 }) ((show, Z) => {
 
   'use strict';
 
-  /* istanbul ignore if */
+  /* c8 ignore start */
   if (typeof __doctest !== 'undefined') {
     /* eslint-disable no-unused-vars, no-var */
     var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
     /* eslint-enable no-unused-vars, no-var */
   }
+  /* c8 ignore stop */
 
   const identityTypeIdent = 'sanctuary-identity/Identity@1';
 
@@ -64,23 +66,23 @@
     /* eslint-enable key-spacing */
   };
 
-  /* istanbul ignore else */
   if (
     typeof process !== 'undefined' &&
     process != null &&
     process.versions != null &&
     process.versions.node != null
   ) {
-    prototype[
-      Symbol.for ('nodejs.util.inspect.custom')  // added in Node.js v10.12.0
-    ] = Identity$prototype$show;
+    const inspect = Symbol.for ('nodejs.util.inspect.custom');
+    prototype[inspect] = Identity$prototype$show;
   }
-  /* istanbul ignore if */
-  if (typeof Deno !== 'undefined') {
-    if (Deno != null && typeof Deno.customInspect === 'symbol') {
-      prototype[Deno.customInspect] = Identity$prototype$show;
-    }
-  }
+
+  /* c8 ignore start */
+  if (
+    typeof Deno !== 'undefined' &&
+    Deno != null &&
+    typeof Deno.customInspect === 'symbol'
+  ) prototype[Deno.customInspect] = Identity$prototype$show;
+  /* c8 ignore stop */
 
   //. `Identity a` satisfies the following [Fantasy Land][] specifications:
   //.
