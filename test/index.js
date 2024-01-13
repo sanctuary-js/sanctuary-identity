@@ -1,4 +1,5 @@
 import {deepStrictEqual as eq} from 'node:assert';
+import {inspect} from 'node:util';
 
 import laws from 'fantasy-laws';
 import jsc from 'jsverify';
@@ -67,6 +68,13 @@ test ('@@show', () => {
   eq (show (Identity (['foo', 'bar', 'baz'])),
       'Identity (["foo", "bar", "baz"])');
   eq (show (Identity (Identity (Identity (-0)))),
+      'Identity (Identity (Identity (-0)))');
+});
+
+test ('util.inspect', () => {
+  eq (inspect (Identity (['foo', 'bar', 'baz'])),
+      'Identity (["foo", "bar", "baz"])');
+  eq (inspect (Identity (Identity (Identity (-0)))),
       'Identity (Identity (Identity (-0)))');
 });
 
