@@ -9,7 +9,7 @@ import Z from 'sanctuary-type-classes';
 import type from 'sanctuary-type-identifiers';
 import Useless from 'sanctuary-useless';
 
-import Identity from '../index.js';
+import {Identity} from '../index.js';
 
 
 //    IdentityArb :: Arbitrary a -> Arbitrary (Identity a)
